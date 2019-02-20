@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Users from './components/user'
+import setUserData from './actions';
+import {connect} from 'react-redux';
+import JsonHolder from './api/jsonplaceholder'
+
 
 class App extends Component {
+  componentDidMount() {
+    JsonHolder("/users")
+      .then((response) => {
+        const users = response.data;
+        return users;
+      })
+  }
+  
   render() {
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+          <Users user = {this.props}/>
+  
       </div>
     );
   }
 }
-
-export default App;
+function mapStateToProps(state){
+  return{
+    user:state.userInfo.user
+  }
+}
+function mapDispatchToProps(dispatch){
+  debugger
+  return{
+    setUser:users=>
+    dispatch(setUserData(users))
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(App);
