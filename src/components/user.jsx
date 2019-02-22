@@ -1,12 +1,13 @@
 import React from 'react'
 
 const Users = props => {
+
     return (
         <table className="ui fixed table" >
             <thead>
                 <tr>
                     <th>Users</th>
-                    <th>Username</th>
+                    <th>Name</th>
                     <th>e-mail</th>
                     <th>City</th>
                     <th>Street</th>
@@ -16,7 +17,7 @@ const Users = props => {
                 </tr>
             </thead>
             <tbody>
-                {/* {props.user.map(u => <tr key = {u.id}>
+                {props.user.users.map(u => <tr key = {u.id}>
                     <td>{u.username}</td>
                     <td>{u.name}</td>
                     <td>{u.email}</td>
@@ -25,8 +26,8 @@ const Users = props => {
                     <td>{u.phone}</td>
                     <td>{u.website}</td>
                     <td>{u.company.name}</td>
-                </tr>)} */}
-                
+                </tr>)}
+
             </tbody>
         </table >)
 }
