@@ -1,4 +1,4 @@
-import { SET_USER_DATA } from "../constants/constants";
+import { SET_USER_DATA,REMOVE_DATA } from "../constants/constants";
 
 const initialState = {
     users:[],
@@ -12,6 +12,11 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 users:action.payload,
                 isLoaded:true
+            }
+        case REMOVE_DATA:
+            return{
+                ...state,
+                users:  state.users.filter(s => s.id !== action.payload)
             }
         default:
             return state

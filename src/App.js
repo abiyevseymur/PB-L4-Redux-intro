@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Users from './components/user'
 import { connect } from 'react-redux';
 import jsonplaceholder from './api/jsonplaceholder'
-import { setUser, setPosts } from './actions';
+import { setUser, setPosts, removeRow } from './actions';
 import Posts from './components/posts';
 
 class App extends Component {
@@ -21,12 +21,12 @@ class App extends Component {
       })
 
   }
-
+   
   render() {
     if (this.props.users.isLoaded && this.props.posts.isLoaded === true) {
       return (
         <div>
-          <Users user={this.props.users} />
+          <Users user={this.props.users} remove = {this.props.removeUserData}/>
           <Posts post={this.props.posts} />
         </div>
       );
@@ -38,15 +38,18 @@ class App extends Component {
   }
 }
 function mapStateToProps(store) {
+  console.log(store.users)
   return {
     users: store.users,
     posts: store.posts
   }
 }
 function mapDispatchToProps(dispatch) {
+
   return {
     setUserAction: users => dispatch(setUser(users)),
-    setPostAction: posts => dispatch(setPosts(posts))
+    setPostAction: posts => dispatch(setPosts(posts)),
+    removeUserData:id =>dispatch(removeRow(id))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);

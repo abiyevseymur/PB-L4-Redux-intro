@@ -1,6 +1,13 @@
 import React from 'react'
+import './../App.css'
 
 const Users = props => {
+
+    let btnF = e => {
+        const id = e.target.parentElement.id
+        props.remove(parseInt(id))
+    }
+  
 
     return (
         <table className="ui fixed table" >
@@ -17,7 +24,7 @@ const Users = props => {
                 </tr>
             </thead>
             <tbody>
-                {props.user.users.map(u => <tr key = {u.id}>
+                {props.user.users.map(u => <tr key={u.id} id={u.id}>
                     <td>{u.username}</td>
                     <td>{u.name}</td>
                     <td>{u.email}</td>
@@ -26,6 +33,8 @@ const Users = props => {
                     <td>{u.phone}</td>
                     <td>{u.website}</td>
                     <td>{u.company.name}</td>
+                    <button id="btn" onClick={btnF}>Delete</button>
+
                 </tr>)}
 
             </tbody>
